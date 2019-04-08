@@ -1,22 +1,26 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export default {
-    entry: './examples/main.js',
-    output: {
-        filename: './dist/bundle.js',
-    },
+module.exports = {
     devtool: 'source-map',
-    resolve: {
-        extensions: ['.js']
-    },
+    entry: './examples/main.js',
     module: {
         rules: [
-            {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/}
+            {
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                test: /\.js$/
+            }
         ]
+    },
+    output: {
+        filename: './dist/bundle.js',
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'react-pan-and-zoom-hoc examples'
         })
-    ]
+    ],
+    resolve: {
+        extensions: ['.js']
+    }
 };
